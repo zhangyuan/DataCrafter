@@ -23,5 +23,6 @@ class SparkRunner:
         self.spark_session = spark_session
 
     def run(self, script: Script, context: Context=None):
-        statement = self.compiler.compile(script.content, variables=context.variables)
+        variables = context.variables if context else {}
+        statement = self.compiler.compile(script.content, variables=variables)
         return self.spark_session.sql(statement)

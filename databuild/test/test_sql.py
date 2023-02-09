@@ -17,7 +17,7 @@ class TestSQL:
         assert_dataframes(expected_df, df)
 
 
-    def test_execute_select_statement(self):
+    def test_compile_variables(self):
         spark_session = get_or_create_local_session("app")
         runner = SparkRunner(spark_session=spark_session)
 
