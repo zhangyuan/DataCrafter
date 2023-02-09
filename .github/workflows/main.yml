@@ -1,0 +1,21 @@
+name: Build
+
+on:
+  push:
+    branches:
+      - "**"
+    tags-ignore:
+      - 'v*'
+  pull_request: {}
+
+jobs:
+  build:
+    runs-on: ubuntu-20.04
+    steps:
+    - uses: actions/checkout@v3
+    - uses: actions/setup-python@v4
+      with:
+        python-version: '3.8'
+    - run: pip install -r requirements.txt
+    - run: pylint databuild
+    - run: pytest databuild
