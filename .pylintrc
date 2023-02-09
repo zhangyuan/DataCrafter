@@ -1,3 +1,6 @@
+[MASTER]
+init-hook='import sys; sys.path.append("./databuild")'
+
 [MAIN]
 
 # Analyse import fallback blocks. This can be used to support both Python 2 and
@@ -423,7 +426,9 @@ disable=raw-checker-failed,
         deprecated-pragma,
         use-symbolic-message-instead,
         missing-module-docstring,
-        missing-function-docstring
+        missing-function-docstring,
+        missing-class-docstring,
+        too-few-public-methods
 
 # Enable the message, report, category or checker with the given id(s). You can
 # either give multiple identifier separated by comma (,) or put this option
