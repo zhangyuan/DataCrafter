@@ -1,14 +1,27 @@
+import jinja2
+
+class Context():
+    def __init__(self, variables: dict) -> None:
+        self.variables = variables
+
+class Macro():
+    pass
+
 class Script:
     def __init__(self, content: str) -> None:
         self.content = content
 
-    def render(self):
-        return self.content
+class Compiler():
+    def compile(self, template, variables):
+        j2_template = jinja2.Template(template, undefined=jinja2.StrictUndefined)
+        return j2_template.render(var=variables)
 
 
 class SparkRunner:
-    def __init__(self, spark_session) -> None:
+    def __init__(self, spark_session, compiler=None) -> None:
+        self.compiler = compiler if compiler is not None else Compiler()
         self.spark_session = spark_session
 
-    def run(self, script: Script):
-        return self.spark_session.sql(script.render())
+    def run(self, script: Script, context: Context=None):
+        statement = self.compiler.compile(script.content, variables=context.variables)
+        return self.spark_session.sql(statement)
