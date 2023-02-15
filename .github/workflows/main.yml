@@ -18,3 +18,7 @@ jobs:
     - run: pip install -r requirements.txt
     - run: make lint
     - run: make test
+    - name: pytest-coverage-commentator
+      uses: coroo/pytest-coverage-commentator@v1.0.2
+      with:
+        pytest-coverage: pytest-coverage.txt
