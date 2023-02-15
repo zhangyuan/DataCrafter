@@ -5,8 +5,13 @@ test:
 
 .PHONY: lint
 lint:
-	pylint databuild
+	ruff check --show-fixes databuild
+
+.PHONY: black
+black:
+	black databuild
+
 
 .PHONY: format
 format:
-	black databuild
+	ruff check --fix --show-fixes databuild
