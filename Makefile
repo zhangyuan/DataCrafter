@@ -1,6 +1,10 @@
 .PHONY: test
 test:
-	(cd databuild && python -m pytest test)
+	(cd databuild &&  python -m pytest -v test --cov=.)
+
+.PHONY: coverage
+coverage:
+	(cd databuild &&  python -m pytest test -v --cov=. > pytest-coverage.txt )
 
 
 .PHONY: lint

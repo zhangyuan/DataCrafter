@@ -1,11 +1,9 @@
-name: Build
+name: Coverage
 
 on:
-  push:
+  pull_request:
     branches:
-      - "**"
-    tags-ignore:
-      - 'v*'
+      - '*'
 
 jobs:
   build:
@@ -16,9 +14,8 @@ jobs:
       with:
         python-version: '3.8'
     - run: pip install -r requirements.txt
-    - run: make lint
-    - run: make test
+    - run: make coverage
     - name: pytest-coverage-commentator
       uses: coroo/pytest-coverage-commentator@v1.0.2
       with:
-        pytest-coverage: pytest-coverage.txt
+        pytest-coverage: databuild/pytest-coverage.txt

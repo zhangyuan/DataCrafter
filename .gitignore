@@ -3,3 +3,5 @@ __pycache__
 .pytest_cache
 /.vscode
 .ruff_cache
+.coverage
+pytest-coverage.txt
