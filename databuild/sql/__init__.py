@@ -2,8 +2,8 @@ import jinja2
 
 
 class Context:
-    def __init__(self, variables: dict) -> None:
-        self.variables = variables
+    def __init__(self, params: dict) -> None:
+        self.params = params
 
 
 class Macro:
@@ -16,9 +16,9 @@ class Script:
 
 
 class Compiler:
-    def compile(self, template, variables):
+    def compile(self, template, params):
         j2_template = jinja2.Template(template, undefined=jinja2.StrictUndefined)
-        return j2_template.render(var=variables)
+        return j2_template.render(params=params)
 
 
 class SparkRunner:
@@ -27,6 +27,6 @@ class SparkRunner:
         self.spark_session = spark_session
 
     def run(self, script: Script, context: Context = None):
-        variables = context.variables if context else {}
-        statement = self.compiler.compile(script.content, variables=variables)
+        params = context.params if context else {}
+        statement = self.compiler.compile(script.content, params=params)
         return self.spark_session.sql(statement)
