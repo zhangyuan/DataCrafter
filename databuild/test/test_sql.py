@@ -1,6 +1,6 @@
 from pathlib import Path
 from sql import SparkRunner, Context
-from spark import get_or_create_local_session
+from spark.helpers import get_or_create_local_session
 from spark.testing import assert_dataframes
 
 
