@@ -39,7 +39,7 @@ class TestSpark:
                 AS data(id, user_id, created_at)
         """
         )
-        assert_dataframes(expected_df, df)        
+        assert_dataframes(expected_df, df)
 
     def test_assert_csv_and_table(self):
         spark_session = get_or_create_local_session("app")
