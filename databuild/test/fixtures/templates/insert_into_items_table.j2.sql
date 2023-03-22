@@ -1,7 +1,3 @@
-{% macro select_columns(table_name) -%}
-    ingestion_date, id, title
-{%- endmacro %}
-
 with raw_items as (
     SELECT data.*
     FROM VALUES
@@ -11,5 +7,5 @@ with raw_items as (
 
 INSERT OVERWRITE TABLE items
     SELECT
-        {{ select_columns('items') }}
+        {{ helper.star('items') }}
 FROM raw_items

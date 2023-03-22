@@ -7,6 +7,7 @@ def assert_dataframes(df1, df2):
 
 
 def assert_csv_with_table(spark_session: SparkSession, csv_path, table_name):
+    spark_session.sql("drop table if exists expected_table")
     helpers.load_table_from_csv(
         spark_session=spark_session, table_name="expected_table", file_path=csv_path
     )

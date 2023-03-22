@@ -64,7 +64,6 @@ class TestSQL:
             params={"logical_date": "2023-01-01"}, template_directory=template_directory
         )
 
-        spark_session.sql("drop table if exists items")
         # pylint: disable=invalid-name
         runner.execute_template_path("create_items_table.j2.sql", context=context)
 
