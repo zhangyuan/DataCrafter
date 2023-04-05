@@ -26,6 +26,8 @@ class Helper:
         df = self.spark_session.sql(f"SHOW COLUMNS IN {from_table}")
         columns = list(x[0] for x in df.collect())
         if except_columns:
+            if not isinstance(except_columns, list):
+                except_columns = [except_columns]
             columns = list(x for x in columns if x not in except_columns)
         return ", ".join(columns)
 

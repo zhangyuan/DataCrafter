@@ -57,7 +57,7 @@ class TestSQL(unittest.TestCase):
         expected_df = spark_session.sql("select '2023-01-01' AS date")
         assert_dataframes(expected_df, df)
 
-    def test_compile_template_file_with_spark_session(self):
+    def test_compile_template_file_with_star(self):
         runner = SparkRunner(spark_session=self.spark_session)
 
         path = Path(__file__)
@@ -71,17 +71,17 @@ class TestSQL(unittest.TestCase):
         )
 
         # pylint: disable=invalid-name
-        runner.execute_template_path("create_items_table.j2.sql", context=context)
+        runner.execute_template_path("items/create_items_table.j2.sql", context=context)
 
-        runner.execute_template_path("insert_into_items_table.j2.sql", context=context)
+        runner.execute_template_path("items/insert_into_items_table.j2.sql", context=context)
 
         assert_csv_with_table(
             spark_session=self.spark_session,
-            csv_path=test_helper.fixture_path("fixtures/data/expected_items.csv"),
+            csv_path=test_helper.fixture_path("fixtures/data/items/expected_items.csv"),
             table_name="items",
         )
 
-    def test_helper_star(self):
+    def test_compile_template_file_with_star_and_except_columns(self):
         runner = SparkRunner(spark_session=self.spark_session)
 
         path = Path(__file__)
