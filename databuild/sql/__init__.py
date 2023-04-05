@@ -2,9 +2,10 @@ import jinja2
 
 
 class Context:
-    def __init__(self, params: dict=None, template_directory: str = None) -> None:
+    def __init__(self, params: dict = None, template_directory: str = None) -> None:
         self.params = params if params else {}
         self.template_directory = template_directory
+
 
 class Compiler:
     def compile(self, template, params, helper=None):
@@ -18,6 +19,7 @@ class Compiler:
         template = environment.get_template(template_name)
         return template.render(params=params, helper=helper)
 
+
 class Helper:
     def __init__(self, spark_session) -> None:
         self.spark_session = spark_session
@@ -30,6 +32,7 @@ class Helper:
                 except_columns = [except_columns]
             columns = list(x for x in columns if x not in except_columns)
         return ", ".join(columns)
+
 
 class SparkRunner:
     def __init__(self, spark_session, compiler=None) -> None:

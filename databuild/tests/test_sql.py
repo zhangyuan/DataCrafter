@@ -5,6 +5,7 @@ from spark.helpers import get_or_create_local_session
 from spark.testing import assert_dataframes, assert_csv_with_table
 from tests import test_helper
 
+
 class TestSQL(unittest.TestCase):
     def setUp(self) -> None:
         self.spark_session = get_or_create_local_session("app")
@@ -73,7 +74,9 @@ class TestSQL(unittest.TestCase):
         # pylint: disable=invalid-name
         runner.execute_template_path("items/create_items_table.j2.sql", context=context)
 
-        runner.execute_template_path("items/insert_into_items_table.j2.sql", context=context)
+        runner.execute_template_path(
+            "items/insert_into_items_table.j2.sql", context=context
+        )
 
         assert_csv_with_table(
             spark_session=self.spark_session,
@@ -95,12 +98,16 @@ class TestSQL(unittest.TestCase):
         )
 
         # pylint: disable=invalid-name
-        runner.execute_template_path("events/create_events_table.j2.sql", context=context)
+        runner.execute_template_path(
+            "events/create_events_table.j2.sql", context=context
+        )
 
         runner.execute_template_path("events/transform.j2.sql", context=context)
 
         assert_csv_with_table(
             spark_session=self.spark_session,
-            csv_path=test_helper.fixture_path("fixtures/data/events/expected_events.csv"),
+            csv_path=test_helper.fixture_path(
+                "fixtures/data/events/expected_events.csv"
+            ),
             table_name="events",
         )
