@@ -1,4 +1,4 @@
-from test import test_helper
+from tests import test_helper
 from spark.helpers import get_or_create_local_session, load_table_from_csv
 from spark.testing import assert_dataframes, assert_csv_with_table
 
