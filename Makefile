@@ -1,6 +1,6 @@
 .PHONY: test
 test:
-	(cd databuild &&  python -m pytest -v test --cov=.)
+	(cd databuild &&  python -m pytest -v tests --cov=.)
 
 .PHONY: coverage
 coverage:

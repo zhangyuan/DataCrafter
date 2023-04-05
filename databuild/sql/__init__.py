@@ -2,14 +2,9 @@ import jinja2
 
 
 class Context:
-    def __init__(self, params: dict, template_directory: str = None) -> None:
-        self.params = params
+    def __init__(self, params: dict=None, template_directory: str = None) -> None:
+        self.params = params if params else {}
         self.template_directory = template_directory
-
-
-class Macro:
-    pass
-
 
 class Compiler:
     def compile(self, template, params, helper=None):
@@ -30,6 +25,8 @@ class Helper:
     def star(self, from_table, except_columns=None):
         df = self.spark_session.sql(f"SHOW COLUMNS IN {from_table}")
         columns = list(x[0] for x in df.collect())
+        if except_columns:
+            columns = list(x for x in columns if x not in except_columns)
         return ", ".join(columns)
 
 class SparkRunner:
