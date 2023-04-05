@@ -4,7 +4,7 @@ test:
 
 .PHONY: coverage
 coverage:
-	(cd databuild &&  python -m pytest test -v --cov=. > pytest-coverage.txt )
+	(cd databuild &&  python -m pytest tests -v --cov=. > pytest-coverage.txt )
 
 
 .PHONY: lint
