@@ -14,7 +14,7 @@ class Compiler:
 
     def compile_file(self, template_directory, template_name, params, helper=None):
         loader = jinja2.FileSystemLoader(template_directory)
-        environment = jinja2.Environment(loader=loader)
+        environment = jinja2.Environment(loader=loader, undefined=jinja2.StrictUndefined)
 
         template = environment.get_template(template_name)
         return template.render(params=params, helper=helper)
